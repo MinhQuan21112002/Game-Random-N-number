@@ -18,8 +18,28 @@ let highscore = 0;
 const displayMessage = function (message) {
   document.querySelector('.message').textContent = message;
 };
-function randomNumber(length) {
-  return Math.floor(Math.pow(10, length-1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length-1) - 1));
+function randomNumber(n) {
+  // return Math.floor(Math.pow(10, length-1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length-1) - 1));
+   // n is the length of the number
+  // returns a string representation of the number
+  if (n < 1 || n > 10) {
+    return "Số nhỏ hơn";
+  }
+  // Create a string of digits from 1 to 9
+  var digits = "123456789";
+  // Create an empty string to store the result
+  var number = "";
+  // Loop n times
+  for (var i = 0; i < n; i++) {
+    // Pick a random index from the digits string
+    var index = Math.floor (Math.random () * digits.length);
+    // Append the digit at that index to the result
+    number += digits [index];
+    // Remove the digit from the digits string to avoid repetition
+    digits = digits.replace (digits [index], "");
+  }
+  // Return the result as an integer
+  return parseInt (number);
 }
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
